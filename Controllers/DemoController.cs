@@ -14,7 +14,7 @@ namespace dotnet_demo_app_insights.Controllers
     [ApiController]
     public class DemoController : ControllerBase
     {
-        private readonly string url = "<function_url>";
+        private readonly string url = "https://appinsights-func-bnfwbsd5fyhhbsep.westus3-01.azurewebsites.net/api/products/{id?}";
 
         public DemoController()
         { }
@@ -22,11 +22,11 @@ namespace dotnet_demo_app_insights.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
-            // HttpClient client = new HttpClient();
-            // var response = await client.GetAsync(url);
-            // var text = await response.Content.ReadAsStringAsync();
+            HttpClient client = new HttpClient();
+            var response = await client.GetAsync(url);
+            var text = await response.Content.ReadAsStringAsync();
 
-            return new OkObjectResult("Hello, World!");
+            return new OkObjectResult(text);
         }
 
     }

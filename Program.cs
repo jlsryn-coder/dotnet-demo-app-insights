@@ -1,3 +1,5 @@
+using OpenTelemetry.Resources;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // The following line enables Application Insights telemetry collection.
@@ -9,6 +11,11 @@ builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add OpenTelemetry service name
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource =>
+        resource.AddService("dotnet-demo-app"));
 
 var app = builder.Build();
 
